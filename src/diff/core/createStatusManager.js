@@ -1,11 +1,6 @@
-/**
- * @file createStatusManager
- * @author imcuttle <moyuyc95@gmail.com>
- * @date 03/02/2019
- *
- */
-
-module.exports = ({ limit = Infinity } = {}) => {
+module.exports = ({
+  limit = Infinity
+} = {}) => {
   const map = new Map()
 
   return {
@@ -20,7 +15,10 @@ module.exports = ({ limit = Infinity } = {}) => {
       return gift ? gift.status : gift
     },
     set(node, status, ctx) {
-      this.map.set(node, { status, ctx })
+      this.map.set(node, {
+        status,
+        ctx
+      })
       if (this.map.size >= limit) {
         return false
       }

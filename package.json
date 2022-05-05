@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@moyuyc/visit-tree": "^4.0.3",
     "is-iterable": "^1.1.1"
   }
 }

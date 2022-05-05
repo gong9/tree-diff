@@ -1,16 +1,11 @@
-/**
- * @file createCachedChildGetter
- * @author imcuttle <moyuyc95@gmail.com>
- * @date 03/02/2019
- *
- */
-
-const castArray = require('./castArray')
+const castArray = require('../../visit/castArray')
 
 const SEP = '.'
 
-function createCachedChildGetter(ast = {}, dp, { path = 'children' } = {}) {
-  return function(paths = [], visit) {
+function createCachedChildGetter(ast = {}, dp, {
+  path = 'children'
+} = {}) {
+  return function (paths = [], visit) {
     function get(ref = {}, paths, prefix = '') {
       let key = prefix
       for (let i = 0; i < paths.length; i++) {
@@ -28,10 +23,16 @@ function createCachedChildGetter(ast = {}, dp, { path = 'children' } = {}) {
           dp && (dp[key] = ref)
           continue
         }
-        return { index, ref, broken: true }
+        return {
+          index,
+          ref,
+          broken: true
+        }
       }
 
-      return { ref }
+      return {
+        ref
+      }
     }
 
     // istanbul ignore next if

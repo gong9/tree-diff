@@ -3,10 +3,10 @@
  * @author imcuttle
  */
 
-const walk = require('@moyuyc/visit-tree')
-const createCachedChildGetter = require('./lib/createCachedChildGetter')
-const createStatusManager = require('./lib/createStatusManager')
-const castArray = require('./lib/castArray')
+const { sync } = require('../visit')
+const createCachedChildGetter = require('./core/createCachedChildGetter')
+const createStatusManager = require('./core/createStatusManager')
+const castArray = require('../visit/castArray')
 
 /**
  *
@@ -32,7 +32,7 @@ function detectTreeChanged(treeA, treeB, {
   const sm = createStatusManager({
     limit
   })
- 
+
   const dp = {}
 
   // node 的getter后面要记录一下
@@ -52,7 +52,7 @@ function detectTreeChanged(treeA, treeB, {
   }
 
   const backTracking = fromCtx => {
-    walk(
+    sync(
       fromCtx,
       (ctxNode, ctx) => {
         if (fromCtx !== ctxNode && ctxNode.node) {
@@ -67,7 +67,7 @@ function detectTreeChanged(treeA, treeB, {
     )
   }
 
-  walk(
+  sync(
     treeA,
     null,
     (node, ctx) => {
@@ -128,21 +128,5 @@ function detectTreeChanged(treeA, treeB, {
 
   return sm.map
 }
-
-const demo = detectTreeChanged({
-    a: 11,
-    
-  }, {
-    a: 22
-  }, {
-    equal: (a, b) => {
-      return JSON.stringify(a) === JSON.stringify(b)
-    }
-  }
-
-)
-
-console.log(demo)
-
 
 module.exports = detectTreeChanged
