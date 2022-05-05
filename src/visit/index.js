@@ -8,6 +8,11 @@ function walkParentCtx(ctx, walk) {
     }
 }
 
+/**
+ * 获取路径
+ * @param {*} srcCtx 
+ * @returns 
+ */
 function getPaths(srcCtx) {
     const paths = []
     walkParentCtx(srcCtx, ctx => {
@@ -18,6 +23,11 @@ function getPaths(srcCtx) {
     return paths
 }
 
+/**
+ * 获取父亲
+ * @param {*} srcCtx 
+ * @returns 
+ */
 function getParents(srcCtx) {
     const parents = []
     walkParentCtx(srcCtx, ctx => {

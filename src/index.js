@@ -1,7 +1,4 @@
 const detectTreeChanged = require('./diff')
-
-
-
 const demo = detectTreeChanged({
         a: 11,
         b: 222,

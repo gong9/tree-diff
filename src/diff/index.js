@@ -1,23 +1,17 @@
-/**
- * Detect tow tree what is updated
- * @author imcuttle
- */
-
-const { sync } = require('../visit')
+const {
+  sync
+} = require('../visit')
 const createCachedChildGetter = require('./core/createCachedChildGetter')
 const createStatusManager = require('./core/createStatusManager')
 const castArray = require('../visit/castArray')
 
 /**
- *
- * @public
  * @param treeA {T}
  * @param treeB {T}
  * @param opt {{}}
  * @param [opt.limit=Infinity] - The limit of changed node
  * @param [opt.equal=(a, b) => a === b] - The compare strategy of two node
  * @param [opt.path='children']
- *
  * @return {Map}
  */
 function detectTreeChanged(treeA, treeB, {
