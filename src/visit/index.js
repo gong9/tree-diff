@@ -38,6 +38,34 @@ function getParents(srcCtx) {
     return parents
 }
 
+
+const noop = () => {}
+
+/**
+ * 开始遍历
+ * @param {*} node 
+ * @param {*} preWalk 
+ * @param {*} postWalk 
+ * @param {*} options 
+ */
+async function walkTree(node, preWalk, postWalk, options) {
+    if (typeof postWalk !== 'function') {
+        options = postWalk
+        postWalk = noop
+    }
+
+    await walkNodeInner(node, preWalk || noop, postWalk || noop, null, options)
+}
+
+/**
+ * 遍历节点内部
+ * @param {*} node 
+ * @param {*} preWalk 
+ * @param {*} postWalk 
+ * @param {*} ctx 
+ * @param {*} options 
+ * @returns 
+ */
 async function walkNodeInner(node, preWalk, postWalk, ctx, options = {}) {
     const {
         path = 'children', state
@@ -124,6 +152,15 @@ async function walkNodeInner(node, preWalk, postWalk, ctx, options = {}) {
     }
 }
 
+/**
+ * 同步遍历节点内部
+ * @param {*} node 
+ * @param {*} preWalk 
+ * @param {*} postWalk 
+ * @param {*} ctx 
+ * @param {*} options 
+ * @returns 
+ */
 function walkNodeInnerSync(node, preWalk, postWalk, ctx, options = {}) {
     const {
         path = 'children', state
@@ -210,16 +247,13 @@ function walkNodeInnerSync(node, preWalk, postWalk, ctx, options = {}) {
     }
 }
 
-const noop = () => {}
-async function walkTree(node, preWalk, postWalk, options) {
-    if (typeof postWalk !== 'function') {
-        options = postWalk
-        postWalk = noop
-    }
-
-    await walkNodeInner(node, preWalk || noop, postWalk || noop, null, options)
-}
-
+/**
+ * 同步遍历
+ * @param {*} node 
+ * @param {*} preWalk 
+ * @param {*} postWalk 
+ * @param {*} options 
+ */
 function walkTreeSync(node, preWalk, postWalk, options) {
     if (typeof postWalk !== 'function') {
         options = postWalk

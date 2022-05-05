@@ -18,8 +18,6 @@ function createCachedChildGetter(ast = {}, dp, {
           ref = refChildren[index]
           let isFirst = key === ''
           key += (!isFirst ? SEP : '') + index
-
-          // istanbul ignore next if
           dp && (dp[key] = ref)
           continue
         }
@@ -35,7 +33,6 @@ function createCachedChildGetter(ast = {}, dp, {
       }
     }
 
-    // istanbul ignore next if
     if (dp) {
       let newPaths = paths.slice()
       let ref = ast
